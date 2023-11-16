@@ -1,95 +1,46 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { Metadata } from 'next';
+import Link from 'next/link';
 
-export default function Home() {
+import styles from './page.module.css';
+
+export const metadata: Metadata = {
+  title: 'Pornonly - Políticas',
+};
+
+export default function Page() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <h1 className={styles.title}>Políticas e diretrizes</h1>
+      <p className={styles['paragraph-main']}>
+        Estas são nossas diretrizes para incentivar uma experiência positiva.
+      </p>
+      <div className={styles['container-info-menus']}>
+        <div className={styles['container-info']}>
+          <h3>Termos de serviço</h3>
+          <p>Termos com os quais você concorda ao usar a Pornonly</p>
+          <Link href="/terms-service">Saiba mais</Link>
+        </div>
+        <div className={styles['container-info']}>
+          <h3>Política de privacidade</h3>
+          <p>Informações que coletamos, como usamos essas informações</p>
+          <Link href="/privacy-policy">Saiba mais</Link>
+        </div>
+        <div className={styles['container-info']}>
+          <h3>Política de cookies</h3>
+          <p>
+            Utilizamos cookies e tecnologias similares para coletar informações
+            sobre suas preferências e atividades de navegação no nosso site.
+          </p>
+          <Link href="/cookies-policy">Saiba mais</Link>
+        </div>
+        <div className={styles['container-info']}>
+          <h3>Termos de uso</h3>
+          <p>
+            Se você não concorda com os termos, por favor, não use nosso site.
+          </p>
+          <Link href="/terms-use">Saiba mais</Link>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
-  )
+  );
 }
