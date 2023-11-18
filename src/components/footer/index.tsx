@@ -25,12 +25,10 @@ export default function Footer() {
       <div className={styles['container-footer-menus']}>
         <h3>Mias+</h3>
         <Link href="/report-bugs">Reportar bugs</Link>
-        <Link href="/compliments-improvements" target="_blank">
+        <Link href="/compliments-improvements">
           Elogios e sugestões de melhorias
         </Link>
-        <Link href="/request-content-pack" target="_blank">
-          Pedir pack de conteúdos
-        </Link>
+        <Link href="/request-content-pack">Pedir pack de conteúdos</Link>
       </div>
     </footer>
   );

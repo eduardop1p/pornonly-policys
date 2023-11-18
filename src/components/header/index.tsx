@@ -17,12 +17,10 @@ export default function Header() {
         <Link href="/privacy-policy">Privacidade</Link>
         <Link href="/cookies-policy">Cookies</Link>
         <Link href="/report-bugs">Reportar bugs</Link>
-        <Link href="/compliments-improvements" target="_blank">
+        <Link href="/compliments-improvements">
           Elogios e sugestões de melhorias
         </Link>
-        <Link href="/request-content-pack" target="_blank">
-          Pedir pack de conteúdos
-        </Link>
+        <Link href="/request-content-pack">Pedir pack de conteúdos</Link>
       </div>
     </header>
   );
