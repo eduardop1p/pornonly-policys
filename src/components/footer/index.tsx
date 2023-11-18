@@ -21,7 +21,6 @@ export default function Footer() {
         <Link href="/terms-service">Termos de serviço</Link>
         <Link href="/privacy-policy">Política de privacidade</Link>
         <Link href="/cookies-policy">Política de cookies</Link>
-        <Link href="/terms-use">Termos de uso</Link>
       </div>
       <div className={styles['container-footer-menus']}>
         <h3>Mias+</h3>

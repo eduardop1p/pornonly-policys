@@ -13,10 +13,9 @@ export default function Header() {
       </Link>
 
       <div className={styles['container-menus']}>
-        <Link href="/terms-service">Termos de serviço</Link>
+        <Link href="/terms-service">Termos</Link>
         <Link href="/privacy-policy">Privacidade</Link>
         <Link href="/cookies-policy">Cookies</Link>
-        <Link href="/terms-use">Termos de uso</Link>
         <Link href="/report-bugs">Reportar bugs</Link>
         <Link href="/compliments-improvements" target="_blank">
           Elogios e sugestões de melhorias
