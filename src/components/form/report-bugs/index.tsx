@@ -59,6 +59,7 @@ export default function FormReportBugs() {
     handleSubmit,
     formState: { errors },
     setValue,
+    resetField,
   } = useForm<ReportType>({
     resolver: zodResolver(reportSchema),
   });
@@ -79,19 +80,39 @@ export default function FormReportBugs() {
     event?.preventDefault();
     if (isLoading) return;
 
-    console.log(body);
+    /*
+      tenho que substituir essa promise abaixo
+      para uma chamada a minha api e lá tratar
+      esse envio de email para a pornonly@pornonly.xyz
+    */
+    setIsLoading(true);
+    await new Promise((resolve, reject) =>
+      setTimeout(() => {
+        console.log(body);
 
-    toast.success('Reporte enviado, obrigado pelo feedback :)', {
-      position: 'top-right',
-      autoClose: 4000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      pauseOnFocusLoss: false,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
+        toast.success('Reporte enviado, obrigado pelo seu feedback', {
+          position: 'top-right',
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+        resolve(body);
+        setIsLoading(false);
+        handleResetFields();
+      }, 5000)
+    );
+  };
+
+  const handleResetFields = () => {
+    resetField('title');
+    resetField('description');
+    resetField('files');
+    setFiles([]);
   };
 
   const handleChangeTextatera = (event: ChangeEvent<HTMLTextAreaElement>) => {
