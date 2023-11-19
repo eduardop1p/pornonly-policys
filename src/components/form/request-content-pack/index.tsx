@@ -103,17 +103,20 @@ export default function RequestContentPackForm() {
       setTimeout(() => {
         console.log(body);
 
-        toast.success('Pedido feito', {
-          position: 'top-right',
-          autoClose: 4000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          pauseOnFocusLoss: false,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        });
+        toast.success(
+          'Pedido feito, agradecemos seu interesse pelos nossos serviços',
+          {
+            position: 'top-right',
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            pauseOnFocusLoss: false,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          }
+        );
         resolve(body);
         setIsLoading(false);
         handleResetFields();
