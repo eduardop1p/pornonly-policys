@@ -73,7 +73,7 @@ export default function ComplimentsImprovementsForm() {
     register,
     handleSubmit,
     formState: { errors },
-    resetField,
+    reset,
     setValue,
   } = useForm<CompImproType>({
     resolver: zodResolver(compImproSchema),
@@ -119,10 +119,7 @@ export default function ComplimentsImprovementsForm() {
   }, [setValue, showFeedback]);
 
   const handleResetFields = () => {
-    resetField('name');
-    resetField('email');
-    resetField('feedback');
-    resetField('feedbackType');
+    reset({ email: '', feedback: '', feedbackType: '', name: '' });
     setShowFeedback(initialState);
   };
 
@@ -146,7 +143,7 @@ export default function ComplimentsImprovementsForm() {
             type="text"
             id="name"
             maxLength={100}
-            placeholder="Seu nome"
+            placeholder="Seu nome caso desejamos entrar em contato"
             {...register('name')}
           />
           {errors.name && <MsgError msg={errors.name.message} />}
@@ -156,8 +153,8 @@ export default function ComplimentsImprovementsForm() {
           <input
             type="text"
             id="email"
-            // maxLength={100}
-            placeholder="Seu email caso desejamos entrar em contato com você em relação ao feedback"
+            maxLength={100}
+            placeholder="Seu email caso desejamos entrar em contato"
             {...register('email')}
           />
           {errors.email && <MsgError msg={errors.email.message} />}

@@ -1,0 +1,106 @@
+.container-files{
+  width: 100%;
+  display: flex;
+}
+
+.container-file{
+  display: flex;
+  align-items: center;
+}
+.container-file > img, .container-file > video{
+  object-position: center;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.container-file > span{
+  margin-left: 7px;
+  color: var(--g-colorGray300);
+  font-size: var(--font-size-0_90rem);
+}
+.container-btn-remove{
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--g-colorGray150);
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+}
+.container-btn-remove > svg{
+  width: 14px;
+  height: 14px;
+  fill: var(--g-colorGray300);
+  flex: none;
+}
+
+.container-upload{
+  width: 400px;
+  height: 200px;
+  margin-right: 2rem;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.container-upload > small{
+  align-self: flex-start;
+  font-size: var(--font-size-0_9rem);
+  color: var(--g-colored-9c0343);
+  font-weight: var(--font-weight-400);
+  margin-bottom: 7px;
+}
+
+.container-upload > label{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 2px dashed var(--g-colored-9c0343);
+  background-color: var(--g-colorGray0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.container-upload > label > span{
+  width: fit-content;
+  height: 35px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: var(--font-size-0_8rem);
+  font-weight: var(--font-weight-400);
+  background-color: var(--g-colored-9c0343);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--g-colorGray0);
+}
+.container-upload > label > small{
+  color: var(--g-colorGray300);
+  font-weight: var(--font-weight-400);
+  margin-top: 7px;
+  width: 60%;
+  text-align: center;
+}
+
+.container-upload > input{
+  display: none;
+}
+
+.container-files-upload{
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 25px;
+  gap: 7px;
+}
+.container-files-upload > span{
+  color: var(--g-colored-9c0343);
+}

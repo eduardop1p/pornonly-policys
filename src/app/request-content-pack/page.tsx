@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Pornonly - Elogios e sugestões de melhorias',
+  title: 'Pornonly - Pedir pack de conteúdos',
 };
 
-import ComplimentsImprovementsForm from '@/components/form/compliments-improvements-form';
+import RequestContentPackForm from '@/components/form/request-content-pack';
 
 export default function Page() {
   return (
     <main className="main">
       <h1 className="title" style={{ width: '70%' }}>
-        Elogios e sugestões de melhorias
+        Pedir pack de conteúdos
       </h1>
-      <ComplimentsImprovementsForm />
+      <RequestContentPackForm />
     </main>
   );
 }

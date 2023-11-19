@@ -3,39 +3,50 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import z from 'zod';
-import type { ChangeEvent } from 'react';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import z, { set } from 'zod';
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import type { ChangeEvent } from 'react';
+import Image from 'next/image';
 
 import Loading from '../loading';
 import MsgError from '@/components/msgError';
 
 import styles from './styles.module.css';
 
-const reportSchema = z.object({
-  title: z.string().superRefine((val, ctx) => {
+const RequestContentPackSchema = z.object({
+  name: z
+    .optional(z.string())
+    .superRefine((val, ctx) => {
+      if (val && val.length > 100) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Titulo muito longo, tente com menos de 100 caracteres',
+          fatal: true,
+        });
+        return;
+      }
+    })
+    .default(''),
+  email: z
+    .optional(z.string())
+    .superRefine((val, ctx) => {
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (val && !regexEmail.test(val)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Email inválido.',
+          fatal: true,
+        });
+        return;
+      }
+    })
+    .default(''),
+  packName: z.string().superRefine((val, ctx) => {
     if (!val.length || !val) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'Titulo é obrigatório',
-        fatal: true,
-      });
-      return;
-    }
-    if (val.length > 100) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Titulo muito longo, tente com menos de 100 caracteres',
-      });
-    }
-  }),
-  description: z.string().superRefine((val, ctx) => {
-    if (!val.length || !val) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Descrição é obrigatória',
+        message: 'Nome pack é obrigatório',
         fatal: true,
       });
       return;
@@ -43,30 +54,30 @@ const reportSchema = z.object({
     if (val.length > 1000) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'Descrição muito longa, tente com menos de 1000 caracteres',
+        message: 'Nome pack muito longo, tente com menos de 1000 caracteres',
       });
     }
   }),
   files: z.array(z.optional(z.any())),
 });
 
-type ReportType = z.infer<typeof reportSchema>;
+type RequestContentPackType = z.infer<typeof RequestContentPackSchema>;
 
-export default function ReportBugsForm() {
+export default function RequestContentPackForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
     reset,
-  } = useForm<ReportType>({
-    resolver: zodResolver(reportSchema),
+  } = useForm<RequestContentPackType>({
+    resolver: zodResolver(RequestContentPackSchema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   const [files, setFiles] = useState<
     { url: string; fileName: string; fileType: string; file: File }[]
   >([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setValue(
@@ -75,7 +86,10 @@ export default function ReportBugsForm() {
     );
   }, [files, setValue]);
 
-  const hanldeOnSubmit: SubmitHandler<ReportType> = async (body, event) => {
+  const handleOnSubmit: SubmitHandler<RequestContentPackType> = async (
+    body,
+    event
+  ) => {
     event?.preventDefault();
     if (isLoading) return;
 
@@ -89,7 +103,7 @@ export default function ReportBugsForm() {
       setTimeout(() => {
         console.log(body);
 
-        toast.success('Reporte enviado, obrigado pelo seu feedback', {
+        toast.success('Pedido feito', {
           position: 'top-right',
           autoClose: 4000,
           hideProgressBar: true,
@@ -108,7 +122,7 @@ export default function ReportBugsForm() {
   };
 
   const handleResetFields = () => {
-    reset({ description: '', title: '', files: [] });
+    reset({ email: '', files: [], name: '', packName: '' });
     setFiles([]);
   };
 
@@ -157,35 +171,46 @@ export default function ReportBugsForm() {
   return (
     <div className="container-form">
       <ToastContainer />
-      <form onSubmit={handleSubmit(hanldeOnSubmit)} className="form">
+      <form className="form" onSubmit={handleSubmit(handleOnSubmit)}>
         <div className="container-input">
-          <label htmlFor="title">Titulo&nbsp;*</label>
+          <label htmlFor="name">Nome (opcional)</label>
           <input
             type="text"
-            id="title"
+            id="name"
             maxLength={100}
-            placeholder="Um resumo descritivo do problema"
-            {...register('title')}
+            placeholder="Seu nome caso desejamos entrar em contato"
+            {...register('name')}
           />
-          {errors.title && <MsgError msg={errors.title.message} />}
+          {errors.name && <MsgError msg={errors.name.message} />}
         </div>
         <div className="container-input">
-          <label htmlFor="description">Descrição&nbsp;*</label>
+          <label htmlFor="email">Email (opcional)</label>
+          <input
+            type="text"
+            id="email"
+            maxLength={100}
+            placeholder="Seu email caso desejamos entrar em contato"
+            {...register('email')}
+          />
+          {errors.email && <MsgError msg={errors.email.message} />}
+        </div>
+        <div className="container-input">
+          <label htmlFor="pack-name">Nome do pack&nbsp;*</label>
           <textarea
-            id="description"
+            id="pack-name"
             maxLength={1000}
-            placeholder="Uma explicação detalhada do bug, incluindo o que deveria acontecer e o que realmente aconteceu"
-            {...register('description', {
+            placeholder="Uma breve descrição de quem você quer ver na pornonly em relação ao autor do contéudo como seu nome"
+            {...register('packName', {
               onChange(event) {
                 handleChangeTextatera(event);
               },
             })}
           ></textarea>
-          {errors.description && <MsgError msg={errors.description.message} />}
+          {errors.packName && <MsgError msg={errors.packName.message} />}
         </div>
         <div className={styles['container-files']}>
           <div className={styles['container-upload']}>
-            <small>Anexar arquivos</small>
+            <small>Anexar arquivos que descreva melhor (opcional)</small>
             <label htmlFor="file">
               <span>Clique aqui</span>
               <small>Só é permitido no máximo 5 arquivos com 100MB cada</small>
