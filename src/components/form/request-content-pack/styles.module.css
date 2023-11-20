@@ -104,3 +104,25 @@
 .container-files-upload > span{
   color: var(--g-colored-9c0343);
 }
+
+@media (max-width: 900px) {
+  .container-files{
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .container-upload{
+    margin-right: 0;
+    margin-bottom: 7px;
+  }
+  .container-files-upload{
+    margin-top: 0;
+  }
+  .container-file > span{
+    word-wrap: break-word;
+  }
+}
+@media (max-width: 500px) {
+  .container-upload{
+    width: 100%;
+  }
+}

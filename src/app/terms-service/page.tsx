@@ -15,7 +15,7 @@ export default function Page() {
         <h2 className="sub-title">Obrigado por usar a Pornonly!</h2>
         <p className="date">Data de vigência: 16/11/2023</p>
         <p className="paragraph">
-          Bem-vindo a Pornonly! Ao utilizar nosso site, você concorda com os
+          Bem-vind@ a Pornonly! Ao utilizar nosso site, você concorda com os
           seguintes termos e condições. Se você não concorda com estes termos,
           por favor, não use nosso site.
         </p>
