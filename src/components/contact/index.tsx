@@ -12,9 +12,10 @@ export default function Contact({ children }: { children: ReactNode }) {
         ou pelo instagram
         <a
           className="text-link"
-          href="https://www.instagram.com/pornonly.xyxzz/"
+          href="https://www.instagram.com/po.rnonly506/"
+          target="_blank"
         >
-          @pornonly.xyxzz
+          @po.rnonly506
         </a>
         .
       </p>
